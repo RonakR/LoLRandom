@@ -3,6 +3,7 @@ var app = express();
 var request = require('request');
 var mongoose = require('mongoose');
 var _ = require('underscore');
+var fs = require('fs');
 
 mongoose.connect('mongodb://localhost/lolrandom');
 
@@ -17,25 +18,27 @@ app.get('/api/riotTags', function(req, res) {
 		// createDataFromBody(body.data);
 		// console.log(body);
 		data = JSON.parse(body);
-		_.each(data.data, function(element, index, list){
-			Champion.create({
-				tags : element.tags,
-				name : index
-			});
-		});
+		addDataToMongo(data.data);
 	});
 	res.send("success");
 });
 
-var createDataFromBody = function(champions){
-	console.log("here");
-	_.each(champions, function(element, index, list){
-		console.log(element);
+var addDataToMongo = function(data){
+	_.each(data, function(element, index, list){
+		Champion.create({
+			tags : element.tags,
+			name : index
+		});
+		getChampionImage(index);
 	});
-	// for champion in body.data{
-	// 	console.log(champion);
-	// }
-}
+	console.log("added/updated");
+};
+
+var getChampionImage = function(championName){
+	var championNamePng = championName + ".png";
+	request("http://ddragon.leagueoflegends.com/cdn/5.23.1/img/champion/"+championNamePng)
+		.pipe(fs.createWriteStream("./public/images/"+championNamePng));
+};
 
 
 app.listen(8080);
