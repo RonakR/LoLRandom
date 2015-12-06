@@ -1,0 +1,14 @@
+riot api models can go here.
+
+Models:
+    - Champions
+        + tags
+        + damageType
+        + lane
+    - Physical Damage
+        + Champion
+    - Magic Damage
+        + Champion
+    - Top
+        + Champion
+    - 
