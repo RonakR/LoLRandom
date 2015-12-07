@@ -18,7 +18,7 @@
 
 <body ng-controller="mainController">
 	<div class="container">
-		<div class="jumbotron">LoL Ramdom</div>	
+		<div class="jumbotron">LoL Random</div>	
 	</div>
 	<div class="container">
 		<select class="chosen-select" style="width:100%"multiple="multiple">
@@ -26,7 +26,9 @@
 			<option>Tank</option>
 			<option>Fighter</option>
 		</select>
-		<input class="btn btn-default" type="button" value="Generate" />
+		<button class="btn btn-default" type="button" ng-click="generate()">
+			Generate
+		</button>
 		<input class="btn btn-default" type="button" value="Randmoize"/>
 	</div>
 </body>

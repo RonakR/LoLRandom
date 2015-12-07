@@ -7,6 +7,7 @@ var fs = require('fs');
 
 mongoose.connect('mongodb://localhost/lolrandom');
 
+
 var Champion = mongoose.model('Champion', {
 	tags: Array,
 	name: String
@@ -39,6 +40,10 @@ var getChampionImage = function(championName){
 	request("http://ddragon.leagueoflegends.com/cdn/5.23.1/img/champion/"+championNamePng)
 		.pipe(fs.createWriteStream("./public/images/"+championNamePng));
 };
+
+app.post('/api/championsByroles', function(req, res){
+	console.log(req.body);
+});
 
 
 app.listen(8080);
