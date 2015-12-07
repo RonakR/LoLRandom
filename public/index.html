@@ -9,6 +9,7 @@
 	<!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"> -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/chosen.min.css">
+	<link rel="stylesheet" href="./css/styles.css">
 
 	<!-- // <script src="../node_modules/angular/angular.min.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
@@ -25,7 +26,7 @@
 
 	</div>
 	<div class="container">	
-		<select class="chosen-select" style="width:100%" multiple="multiple">
+		<select class="chosen-select" multiple="multiple">
 			<optgroup label="Roles">
 				<option>Assassin</option>
 				<option>Fighter</option>
@@ -49,11 +50,17 @@
 	<div class="container">
 		<input class="btn btn-default" type="button" ng-click="generate()" value="Generate">
 		</input>
-		<input class="btn btn-default" type="submit" ng-click="generate()" value="Randmoize"/>
+		<input class="btn btn-default" type="submit" ng-click="randomize()" value="Randmoize"/>
 	</div>
-	<div ng-repeat="champion in champions">
-		<div class="container">
-			<img src="./images/{{champion.name}}.png">{{champion.name}}</img>
+	<div class="container">
+		<div class="col-md-6 champions" ng-show="champions">
+			<div ng-repeat="champion in champions">
+				<img src="./images/{{champion.name}}.png" ng-click="championSelected(champion)"></img>
+			</div>
+		</div>
+		<div class="col-md-6 champion" ng-show="champion">
+			<img src="./images/{{champion.name}}.png"></img>
+			<div> {{champion.tags}} </div>
 		</div>
 	</div>
 </body>

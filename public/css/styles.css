@@ -1,0 +1,25 @@
+.chosen-select{
+	width:100%;
+}
+div.col-md-6.champions{
+	height: 422px;
+	overflow: auto;
+	border: 1px solid;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+div.col-md-6.champions > div > img {
+	display: inline;
+	padding: 10px;
+}
+div.col-md-6.champion{
+	border: 1px solid;
+	height: 422px;
+}
+div.col-md-6.champion > img {
+	padding: 10px;
+}
+div.col-md-6.champion > div {
+	display: inline;
+}
