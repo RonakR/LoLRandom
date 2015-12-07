@@ -4,9 +4,14 @@ var request = require('request');
 var mongoose = require('mongoose');
 var _ = require('underscore');
 var fs = require('fs');
+var bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/lolrandom');
 
+app.use(express.static('./public'));
+app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
+app.use(bodyParser.json());                                     // parse application/json
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 
 var Champion = mongoose.model('Champion', {
 	tags: Array,
@@ -41,10 +46,18 @@ var getChampionImage = function(championName){
 		.pipe(fs.createWriteStream("./public/images/"+championNamePng));
 };
 
-app.post('/api/championsByroles', function(req, res){
-	console.log(req.body);
+app.post('/api/championsByRoles', function(req, res){
+	Champion.find(
+		{tags: { $all: req.body}}, 
+		function(err, champs){
+			res.send(champs);
+		}
+	);
 });
 
+app.get('*', function(req, res) {
+	res.sendFile(__dirname + '/public/index.html');
+});
 
 app.listen(8080);
 console.log("App listening on port 8080");

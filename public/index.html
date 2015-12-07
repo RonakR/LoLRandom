@@ -6,30 +6,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>LoLRandom</title>
 
-	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+	<!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/chosen.min.css">
 
-	<script src="../node_modules/angular/angular.min.js"></script>
+	<!-- // <script src="../node_modules/angular/angular.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
 	<script src="./javascript/core.js"></script>
 	<script src="./javascript/jquery-2.1.4.min.js"></script>
-	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="./javascript/chosen.jquery.min.js"></script>
 </head>
 
 <body ng-controller="mainController">
 	<div class="container">
 		<div class="jumbotron">LoL Random</div>	
+
+	</div>
+	<div class="container">	
+		<select class="chosen-select" style="width:100%" multiple="multiple">
+			<option>Assassin</option>
+			<option>Fighter</option>
+			<option>Mage</option>
+			<option>Marksman</option>
+			<option>Support</option>
+			<option>Tank</option>
+		</select>
 	</div>
 	<div class="container">
-		<select class="chosen-select" style="width:100%"multiple="multiple">
-			<option>Mage</option>
-			<option>Tank</option>
-			<option>Fighter</option>
-		</select>
-		<button class="btn btn-default" type="button" ng-click="generate()">
+		<label class="btn btn-default" ng-click="generate()">
 			Generate
-		</button>
-		<input class="btn btn-default" type="button" value="Randmoize"/>
+		</label>
+		<input class="btn btn-default" type="submit" ng-click="generate()" value="Randmoize"/>
+	</div>
+	<div ng-repeat="champion in champions">
+		<div class="container">
+			<img src="./images/{{champion.name}}.png">{{champion.name}}</img>
+		</div>
 	</div>
 </body>
 </html>
