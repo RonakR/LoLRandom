@@ -26,18 +26,29 @@
 	</div>
 	<div class="container">	
 		<select class="chosen-select" style="width:100%" multiple="multiple">
-			<option>Assassin</option>
-			<option>Fighter</option>
-			<option>Mage</option>
-			<option>Marksman</option>
-			<option>Support</option>
-			<option>Tank</option>
+			<optgroup label="Roles">
+				<option>Assassin</option>
+				<option>Fighter</option>
+				<option>Mage</option>
+				<option>Marksman</option>
+				<option>Support</option>
+				<option>Tank</option>
+			</optgroup>
+			<optgroup label="Damage Type">
+				<option>Physical</option>
+				<option>Magical</option>
+			</optgroup>
+			<optgroup label="Lanes">
+				<option>Top</option>
+				<option>Jungle</option>
+				<option>Middle</option>
+				<option>Bottom</option>
+			</optgroup>
 		</select>
 	</div>
 	<div class="container">
-		<label class="btn btn-default" ng-click="generate()">
-			Generate
-		</label>
+		<input class="btn btn-default" type="button" ng-click="generate()" value="Generate">
+		</input>
 		<input class="btn btn-default" type="submit" ng-click="generate()" value="Randmoize"/>
 	</div>
 	<div ng-repeat="champion in champions">
