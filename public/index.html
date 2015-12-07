@@ -1,1 +1,33 @@
-index.html
+<!DOCTYPE html>
+
+<html ng-app="lolRandom">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LoLRandom</title>
+
+	<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="./css/chosen.min.css">
+
+	<script src="../node_modules/angular/angular.min.js"></script>
+	<script src="./javascript/core.js"></script>
+	<script src="./javascript/jquery-2.1.4.min.js"></script>
+	<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="./javascript/chosen.jquery.min.js"></script>
+</head>
+
+<body ng-controller="mainController">
+	<div class="container">
+		<div class="jumbotron">LoL Ramdom</div>	
+	</div>
+	<div class="container">
+		<select class="chosen-select" style="width:100%"multiple="multiple">
+			<option>Mage</option>
+			<option>Tank</option>
+			<option>Fighter</option>
+		</select>
+		<input class="btn btn-default" type="button" value="Generate" />
+		<input class="btn btn-default" type="button" value="Randmoize"/>
+	</div>
+</body>
+</html>
