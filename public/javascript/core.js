@@ -21,7 +21,7 @@ lolRandom.controller('mainController', ['$scope', '$http',
 	}
 	$scope.randomize = function(){
 		var numChampions = $scope.champions.length;
-		var randomNum = Math.floor((Math.random()*numChampions)+1);
+		var randomNum = Math.floor((Math.random()*numChampions));
 		$scope.champion = $scope.champions[randomNum];
 	}
 }]);
