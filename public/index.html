@@ -25,10 +25,10 @@
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<span class="navbar-brand">LoL Random</span>
-			</div>	
+			</div>
 		</div>
 	</div>
-	<div class="container">	
+	<div class="container">
 		<select class="chosen-select" multiple="multiple">
 			<optgroup label="Roles">
 				<option>Assassin</option>
@@ -47,6 +47,7 @@
 				<option>Jungle</option>
 				<option>Middle</option>
 				<option>Bottom</option>
+				<option>Support</option>
 			</optgroup>
 		</select>
 	</div>
@@ -56,7 +57,7 @@
 		<input class="btn" type="submit" ng-click="randomize()" ng-class="champions ? 'btn-success' : 'disabled btn-default' " value="Randomize"/>
 	</div>
 	<div class="container">
-		<div class="col-md-6 champions" ng-show="champions">
+		<div class=" champions" ng-show="champions" ng-class="champion ? 'col-md-6' : 'col-md-12' ">
 			<div ng-repeat="champion in champions">
 				<img src="./images/{{champion.name}}.png" ng-click="championSelected(champion)"></img>
 			</div>

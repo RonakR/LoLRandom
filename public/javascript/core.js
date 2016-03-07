@@ -10,6 +10,7 @@ lolRandom.controller('mainController', ['$scope', '$http',
 
 	$scope.generate = function(){
 		// var sendVar = {tags: $(".chosen-select").val()};
+		$scope.champion = "";
 		var sendVar = $(".chosen-select").val();
 		$http.post('api/championsByRoles', sendVar)
 			.success(function(data){

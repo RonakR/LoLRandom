@@ -18,7 +18,7 @@ body{
     justify-content: center;
     padding: 25px;
 }
-div.col-md-6.champions{
+.champions{
 	background-color: #efefef;
 	height: 422px;
 	overflow: auto;
@@ -28,7 +28,7 @@ div.col-md-6.champions{
 	justify-content: space-around;
 	border-radius: 5px 0px 0px 5px;
 }
-div.col-md-6.champions > div > img {
+.champions > div > img {
 	display: inline;
 	padding: 10px;
 }
