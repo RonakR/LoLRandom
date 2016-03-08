@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html ng-app="lolRandom">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>LoLRandom</title>
+
+	<!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="./css/chosen.min.css">
+	<link rel="stylesheet" href="./css/styles.css">
+
+	<!-- // <script src="../node_modules/angular/angular.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<script src="./javascript/core.js"></script>
+	<script src="./javascript/jquery-2.1.4.min.js"></script>
+	<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="./javascript/chosen.jquery.min.js"></script>
+</head>
+
+<body ng-controller="mainController">
+	<div class="navbar navbar-default">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<span class="navbar-brand">LoL Random</span>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<select class="chosen-select" multiple="multiple">
+			<optgroup label="Roles">
+				<option>Assassin</option>
+				<option>Fighter</option>
+				<option>Mage</option>
+				<option>Marksman</option>
+				<option>Support</option>
+				<option>Tank</option>
+			</optgroup>
+			<optgroup label="Damage Type">
+				<option>Physical</option>
+				<option>Magic</option>
+			</optgroup>
+			<optgroup label="Lanes">
+				<option>Top</option>
+				<option>Jungle</option>
+				<option>Middle</option>
+				<option>Bottom</option>
+				<option>Support</option>
+			</optgroup>
+		</select>
+	</div>
+	<div class="container buttons">
+		<input class="btn btn-primary" type="button" ng-click="generate()" value="Generate">
+		</input>
+		<input class="btn" type="submit" ng-click="randomize()" ng-class="champions ? 'btn-success' : 'disabled btn-default' " value="Randomize"/>
+	</div>
+	<div class="container">
+		<div class=" champions" ng-show="champions" ng-class="champion ? 'col-md-6' : 'col-md-12' ">
+			<div ng-repeat="champion in champions">
+				<img src="./images/{{champion.name}}.png" ng-click="championSelected(champion)"></img>
+			</div>
+		</div>
+		<div class="col-md-6 champion" ng-show="champion">
+			<img src="./images/{{champion.name}}.png"></img>
+			<div> {{champion.tags}} </div>
+		</div>
+	</div>
+</body>
+</html>

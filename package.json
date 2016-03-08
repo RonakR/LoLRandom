@@ -1,0 +1,30 @@
+{
+  "name": "lol-random",
+  "version": "1.0.0",
+  "description": "Lol champion picker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RonakR/LoLRandom.git"
+  },
+  "author": "Ronak Raithatha <ronaksraithatha@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RonakR/LoLRandom/issues"
+  },
+  "homepage": "https://github.com/RonakR/LoLRandom#readme",
+  "dependencies": {
+    "angular": "^1.4.8",
+    "body-parser": "^1.14.1",
+    "bootstrap": "^3.3.6",
+    "express": "^4.13.3",
+    "mongoose": "^4.2.9",
+    "nodemon": "^1.8.1",
+    "request": "^2.67.0",
+    "underscore": "^1.8.3"
+  }
+}

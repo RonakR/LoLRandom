@@ -1,0 +1,46 @@
+body{
+	/*background: black;*/
+	background: url('../images/background.jpg');
+	/*background-position: center;*/
+	/*background-size: cover;*/
+}
+.navbar{
+	background: #efefef;
+}
+.chosen-select{
+	width:100%;
+}
+.chosen-container{
+	padding-top: 50px;
+}
+.buttons{
+	display: flex;
+    justify-content: center;
+    padding: 25px;
+}
+.champions{
+	background-color: #efefef;
+	height: 422px;
+	overflow: auto;
+	border: 1px solid;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+	border-radius: 5px 0px 0px 5px;
+}
+.champions > div > img {
+	display: inline;
+	padding: 10px;
+}
+div.col-md-6.champion{
+	background-color: #efefef;
+	border: 1px solid;
+	height: 422px;
+	border-radius: 0px 5px 5px 0px;
+}
+div.col-md-6.champion > img {
+	padding: 10px;
+}
+div.col-md-6.champion > div {
+	display: inline;
+}
