@@ -28,30 +28,40 @@ app.get('/api/riotTags', function(req, res) {
 		// createDataFromBody(body.data);
 		// console.log(body);
 		data = JSON.parse(body);
-		addDataToMongo(data.data);
+		populateFromData(data.data);
 	});
 	res.send("success");
 });
 
-var addDataToMongo = function(data){
+var populateFromData = function(data){
 	//ONLY ADDS RIGHT NOW
 	//needs to update existing ones
 	_.each(data, function(element, index, list){
-		Champion.create({
-			tags : element.tags,
-			name : index
+		var addToMongoPromise = addToMongo(element, index);
+		addToMongoPromise.then(function(champ){
+			console.log("in prom");
 		});
+
+		console.log("before");
 		getChampionImage(index);
+		console.log("after");
 	});
 	console.log("added/updated");
 };
 
-var getChampionImage = function(championName){
-	return new Promise(function(resolve, reject){
-		var championNamePng = championName + ".png";
-		request("http://ddragon.leagueoflegends.com/cdn/5.23.1/img/champion/"+championNamePng)
-		.pipe(fs.createWriteStream("./public/images/"+championNamePng));
+var addToMongo = function(element, index){
+	return Champion.create({
+		tags: element.tags,
+		name: index
 	});
+}
+
+var getChampionImage = function(championName){
+		console.log("just in");
+		var championNamePng = championName + ".png";
+		request("http://ddragon.leagueoflegends.com/cdn/6.4.2/img/champion/"+championNamePng)
+		.pipe(fs.createWriteStream("./public/images/"+championNamePng));
+		console.log("just out");
 };
 
 //Populats more tags from champoin.gg's api
