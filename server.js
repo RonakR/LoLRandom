@@ -18,6 +18,7 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse applica
 //Champion Model in Mongo
 var Champion = mongoose.model('Champion', {
 	tags: Array,
+	laneInfo: Array,
 	name: String
 });
 
@@ -37,43 +38,87 @@ var populateFromData = function(data){
 	//ONLY ADDS RIGHT NOW
 	//needs to update existing ones
 	_.each(data, function(element, index, list){
-		var addToMongoPromise = addToMongo(element, index);
-		addToMongoPromise.then(function(champ){
-			console.log("in prom");
-		});
 
-		console.log("before");
-		getChampionImage(index);
-		console.log("after");
+		var allTags = [];
+		var getMoreChampionDataPromise = getMoreChampionData(index);
+		getMoreChampionDataPromise.then(function(data){
+			allTags = _.union(data.tags, element.tags);
+			var addToMongoPromise = addToMongo(allTags, data.laneInfo, index);
+			var getChampionImagePromise = getChampionImage(index);
+		})
+		//
+		// Promise.all([addToMongoPromise, getChampionImagePromise]).then(function(values){
+		// 	console.log(values);
+		// })
 	});
 	console.log("added/updated");
 };
 
-var addToMongo = function(element, index){
+//Populats more tags from champoin.gg's api
+var getMoreChampionData = function(championName){
+	var retObj = {
+		tags: [],
+		laneInfo: []
+	};
+
+	return new Promise(function(resolve, reject){
+		request('http://api.champion.gg/champion/' + championName + '?api_key='+championGGKey, function(err, response, body){
+			if(err) {
+				console.log(err);
+				reject(err);
+			}
+			data = JSON.parse(body);
+
+			_.each(data, function(element, index, list){
+				//dmgComposition
+				var damageType = element.dmgComposition.magicDmg > element.dmgComposition.physicalDmg ? 'Magic' : 'Physical';
+				if (!_.contains(retObj.tags, damageType)) {
+					retObj.tags.push(damageType);
+				}
+				//lanes
+				retObj.tags.push(element.role);
+				//laneInfo
+				var laneInfoObj = createLaneInfoObj(element.patchWin, element.patchPlay);
+				var obj = {};
+				obj[element.role] = laneInfoObj;
+				retObj.laneInfo.push(obj);
+			});
+
+			resolve(retObj);
+		});
+	});
+};
+
+var createLaneInfoObj = function(patchWin, patchPlay){
+	return {
+		"patchWin": patchWin[patchWin.length-1] > patchWin[patchWin.length-2] ? 'UP' : 'DOWN',
+		"patchPlay": patchPlay[patchPlay.length-1] > patchPlay[patchPlay.length-2] ? 'UP' : 'DOWN'
+	}
+}
+
+var addToMongo = function(allTags, laneInformation, index){
 	return Champion.create({
-		tags: element.tags,
+		tags: allTags,
+		laneInfo: laneInformation,
 		name: index
 	});
 }
 
 var getChampionImage = function(championName){
-		console.log("just in");
+	console.log("just in");
+	return new Promise(function(resolve, reject){
 		var championNamePng = championName + ".png";
 		request("http://ddragon.leagueoflegends.com/cdn/6.4.2/img/champion/"+championNamePng)
+		.on('error', function(err){
+			console.log(err);
+			reject(err);
+		})
 		.pipe(fs.createWriteStream("./public/images/"+championNamePng));
+		resolve("saved");
 		console.log("just out");
+	});
 };
 
-//Populats more tags from champoin.gg's api
-app.get("/api/championTags", function(req, res){
-	request('http://api.champion.gg/champion/corki?api_key='+championGGKey, function(err, response, body){
-		if(err) return console.log(err);
-
-		data = JSON.parse(body);
-		console.log(data);
-	});
-	res.send("success");
-});
 
 app.post('/api/championsByRoles', function(req, res){
 	Champion.find(
