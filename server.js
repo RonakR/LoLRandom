@@ -105,7 +105,7 @@ var addToMongo = function(allTags, laneInformation, index){
 }
 
 var getChampionImage = function(championName){
-	console.log("just in");
+
 	return new Promise(function(resolve, reject){
 		var championNamePng = championName + ".png";
 		request("http://ddragon.leagueoflegends.com/cdn/6.4.2/img/champion/"+championNamePng)
@@ -115,7 +115,6 @@ var getChampionImage = function(championName){
 		})
 		.pipe(fs.createWriteStream("./public/images/"+championNamePng));
 		resolve("saved");
-		console.log("just out");
 	});
 };
 
