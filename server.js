@@ -119,15 +119,6 @@ var getChampionImage = function(championName){
 };
 
 
-app.post('/api/championsByRoles', function(req, res){
-	Champion.find(
-		{tags: { $all: req.body}},
-		function(err, champs){
-			res.send(champs);
-		}
-	);
-});
-
 app.get('*', function(req, res) {
 	res.sendFile(__dirname + '/public/index.html');
 });
