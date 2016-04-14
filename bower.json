@@ -1,0 +1,21 @@
+{
+  "name": "lol-random",
+  "description": "Lol champion picker",
+  "main": "server.js",
+  "authors": [
+    "Ronak Raithatha <ronaksraithatha@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/RonakR/LoLRandom",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "particles.js": "~2.0.0"
+  }
+}
