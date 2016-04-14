@@ -9,21 +9,25 @@ body{
   position: absolute;
   width: 100%;
   height: 100%;
-	z-index: -1;
+	/*z-index: -1;*/
 }
 .navbar{
 	background: #efefef;
 }
 .chosen-select{
 	width:100%;
+	z-index: 1;
 }
 .chosen-container{
 	padding-top: 50px;
 }
 .buttons{
 	display: flex;
-    justify-content: center;
-    padding: 25px;
+  justify-content: center;
+  padding: 25px;
+}
+input.btn{
+	z-index: 1;
 }
 .champions{
 	background-color: #efefef;
@@ -34,6 +38,7 @@ body{
 	flex-flow: row wrap;
 	justify-content: space-around;
 	border-radius: 5px 0px 0px 5px;
+	z-index: 1;
 }
 .champions > div > img {
 	display: inline;
@@ -44,6 +49,7 @@ div.col-md-6.champion{
 	border: 1px solid;
 	height: 422px;
 	border-radius: 0px 5px 5px 0px;
+	z-index: 1;
 }
 div.col-md-6.champion > img {
 	padding: 10px;

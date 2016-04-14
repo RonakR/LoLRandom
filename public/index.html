@@ -59,7 +59,7 @@
 		<input class="btn" type="submit" ng-click="randomize()" ng-class="champions ? 'btn-success' : 'disabled btn-default' " value="Randomize"/>
 	</div>
 	<div class="container">
-		<div class=" champions" ng-show="champions" ng-class="champion ? 'col-md-6' : 'col-md-12' ">
+		<div class="champions" ng-show="champions" ng-class="champion ? 'col-md-6' : 'col-md-12' ">
 			<div ng-repeat="champion in champions">
 				<img src="./images/{{champion.name}}.png" ng-click="championSelected(champion)"></img>
 			</div>
