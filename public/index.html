@@ -65,9 +65,17 @@
 			</div>
 		</div>
 		<div class="col-md-6 champion" ng-show="champion">
-			<img src="./images/{{champion.name}}.png"></img>
-			<div> {{champion.tags}} </div>
-			<div> {{champion.laneInfo}} </div>
+			<!-- <div class="container"> -->
+				<div class="col-md-4">
+					<img src="./images/{{champion.name}}.png"></img>
+				</div>
+				<div class="col-md-8">
+					<div ng-repeat="tag in champion.tags">
+						<span class="label label-default">{{tag}}{{champion.laneInfo[tag]}}<span>
+					</div>
+					<div> {{champion.laneInfo}} </div>
+				</div>
+			<!-- </div> -->
 		</div>
 	</div>
 </body>

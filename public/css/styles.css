@@ -13,6 +13,7 @@ body{
 }
 .navbar{
 	background: #efefef;
+	border-radius: 0;
 }
 .chosen-select{
 	width:100%;
@@ -30,6 +31,7 @@ input.btn{
 	z-index: 1;
 }
 .champions{
+	padding: 0px;
 	background-color: #efefef;
 	height: 422px;
 	overflow: auto;
@@ -45,6 +47,7 @@ input.btn{
 	padding: 10px;
 }
 div.col-md-6.champion{
+	padding: 10px 0;
 	background-color: #efefef;
 	border: 1px solid;
 	height: 422px;

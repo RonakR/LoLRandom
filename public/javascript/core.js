@@ -17,8 +17,17 @@ lolRandom.controller('mainController', ['$scope', '$http',
 		$http.post('api/championsByRoles', sendVar)
 			.success(function(data){
 				$scope.champions = data;
+				// $scope.alterData();
 			});
-	};
+		};
+	// $scope.alterData = function() {
+	// 	console.log($scope.champions)
+	// 	angular.forEach($scope.champions, function(value, key) {
+	// 		angular.forEach(value.laneInfo, function(laneValue, laneKey){
+	// 				console.log(laneValue);
+	// 		});
+	// 	});
+	// }
 	$scope.championSelected = function(champion){
 		$scope.champion = champion;
 	}
