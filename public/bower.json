@@ -16,6 +16,8 @@
     "tests"
   ],
   "dependencies": {
-    "particles.js": "~2.0.0"
+    "particles.js": "~2.0.0",
+    "angular": "angularjs#^1.5.5",
+    "bootstrap": "^3.3.6"
   }
 }

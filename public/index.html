@@ -7,17 +7,20 @@
 	<title>LoLRandom</title>
 
 	<!-- <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css"> -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+	<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="./css/chosen.min.css">
 	<link rel="stylesheet" href="./css/styles.css">
 
 	<!-- // <script src="../node_modules/angular/angular.min.js"></script> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script> -->
+	<script src="./bower_components/angular/angular.min.js"></script>
 	<script src="./javascript/core.js"></script>
 	<script src="./javascript/jquery-2.1.4.min.js"></script>
 	<script src="./bower_components/particles.js/particles.js"></script>
 	<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script> -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="./bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 	<script src="./javascript/chosen.jquery.min.js"></script>
 </head>
 
@@ -71,7 +74,7 @@
 				</div>
 				<div class="col-md-8">
 					<div ng-repeat="tag in champion.tags">
-						<span class="label label-default">{{tag}}{{champion.laneInfo[tag]}}<span>
+						<h5><span class="label label-default">{{tag}}{{champion.laneInfo[tag]}}<span></h5>
 					</div>
 					<div> {{champion.laneInfo}} </div>
 				</div>
