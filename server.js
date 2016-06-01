@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var _ = require('underscore');
 var fs = require('fs');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var riotAPIKey = "83d42fea-41fb-4688-be17-7bf6b7b80c0d"
 var championGGKey = "4442f8cded7a71423321527a8391ef79";
 
@@ -14,6 +15,10 @@ app.use(express.static('./public'));
 app.use(bodyParser.urlencoded({'extended':'true'}));            // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());                                     // parse application/json
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+app.use(session({	cookie: {maxAge: 60000},
+									secret: 'api',
+									resave: false,
+									saveUninitialized: false}));
 
 //Champion Model in Mongo
 var Champion = mongoose.model('Champion', {
@@ -117,13 +122,13 @@ var getChampionImage = function(championName){
 		resolve("saved");
 	});
 };
-app.post('/api/championsByRoles', function(req, res){		
-	Champion.find(		
-		{tags: { $all: req.body}},		
- 		function(err, champs){		
- 			res.send(champs);		
- 		}		
- 	);		
+app.post('/api/championsByRoles', function(req, res){
+	Champion.find(
+		{tags: { $all: req.body}},
+ 		function(err, champs){
+ 			res.send(champs);
+ 		}
+ 	);
 });
 
 app.get('*', function(req, res) {
