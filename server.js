@@ -100,8 +100,8 @@ function populateFromData(data) {
     const getMoreChampionDataPromise = getMoreChampionData(index);
     let addToMongoPromise;
     let getChampionImagePromise;
-    getMoreChampionDataPromise.then((data) => {
-      allTags = _.union(data.tags, element.tags);
+    getMoreChampionDataPromise.then((championData) => {
+      allTags = _.union(championData.tags, element.tags);
       addToMongoPromise = addToMongo(allTags, data.laneInfo, index);
       getChampionImagePromise = getChampionImage(index);
     });
