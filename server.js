@@ -82,14 +82,14 @@ function getChampionImage(championName) {
   return new Promise((resolve, reject) => {
     const championNamePng = `${championName}.png`;
     // Make patch number configurat
-    request('http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/' + championNamePng)
-    .on('error', function (err) {
-      console.log(err)
-      reject(err)
+    request(`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${championNamePng}`)
+    .on('error', (err) => {
+      console.log(err);
+      reject(err);
     })
-    .pipe(fs.createWriteStream('./public/images/' + championNamePng))
-    resolve('saved')
-  })
+    .pipe(fs.createWriteStream(`./public/images/${championNamePng}`));
+    resolve('saved');
+  });
 }
 
 function populateFromData(data) {
@@ -125,19 +125,19 @@ app.get('/api/riotTags', (req, res) => {
   res.send('success');
 });
 
-app.post('/api/championsByRoles', function (req, res) {
+app.post('/api/championsByRoles', (req, res) => {
   Champion.find(
-    {tags: {$all: req.body}},
-    function (err, champs) {
-      if (err) throw err
-      res.send(champs)
-    }
-  )
-})
+    { tags: { $all: req.body } },
+    (err, champs) => {
+      if (err) throw err;
+      res.send(champs);
+    },
+  );
+});
 
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, '/public/'))
-})
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/public/'));
+});
 
-app.listen(8080)
-console.log('App listening on port 8080')
+app.listen(8080);
+console.log('App listening on port 8080');
