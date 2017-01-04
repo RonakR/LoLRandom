@@ -131,8 +131,7 @@ app.post('/api/championsByRoles', (req, res) => {
     (err, champs) => {
       if (err) throw err;
       res.send(champs);
-    },
-  );
+    });
 });
 
 app.get('*', (req, res) => {
