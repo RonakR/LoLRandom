@@ -6,6 +6,7 @@ var _ = require('underscore');
 var fs = require('fs');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+//Keys should be in a config file
 var riotAPIKey = "83d42fea-41fb-4688-be17-7bf6b7b80c0d"
 var championGGKey = "4442f8cded7a71423321527a8391ef79";
 
@@ -29,6 +30,7 @@ var Champion = mongoose.model('Champion', {
 
 //Populates the db by hitting riot's api.
 app.get('/api/riotTags', function(req, res) {
+	//Version number in config
 	request('https://na.api.pvp.net/api/lol/static-data/na/v1.2/champion?champData=tags&api_key=' + riotAPIKey, function(err, response, body) {
 		if (err) return console.log(err);
 		// createDataFromBody(body.data);
@@ -46,15 +48,17 @@ var populateFromData = function(data){
 
 		var allTags = [];
 		var getMoreChampionDataPromise = getMoreChampionData(index);
+		var addToMongoPromise
+		var getChampionImagePromise
 		getMoreChampionDataPromise.then(function(data){
 			allTags = _.union(data.tags, element.tags);
-			var addToMongoPromise = addToMongo(allTags, data.laneInfo, index);
-			var getChampionImagePromise = getChampionImage(index);
+			addToMongoPromise = addToMongo(allTags, data.laneInfo, index);
+			getChampionImagePromise = getChampionImage(index);
 		})
-		//
-		// Promise.all([addToMongoPromise, getChampionImagePromise]).then(function(values){
-		// 	console.log(values);
-		// })
+
+		Promise.all([addToMongoPromise, getChampionImagePromise]).catch(function(err){
+			throw err;
+		})
 	});
 	console.log("added/updated");
 };
@@ -113,7 +117,8 @@ var getChampionImage = function(championName){
 
 	return new Promise(function(resolve, reject){
 		var championNamePng = championName + ".png";
-		request("http://ddragon.leagueoflegends.com/cdn/6.4.2/img/champion/"+championNamePng)
+		//Make patch number configurat
+		request("http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/"+championNamePng)
 		.on('error', function(err){
 			console.log(err);
 			reject(err);
