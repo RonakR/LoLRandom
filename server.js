@@ -6,9 +6,10 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const session = require('express-session');
 const path = require('path');
+const config = require('./config.json');
 // Keys should be in a config file
-const riotAPIKey = '83d42fea-41fb-4688-be17-7bf6b7b80c0d';
-const championGGKey = '4442f8cded7a71423321527a8391ef79';
+const riotAPIKey = config.riotAPIKey;
+const championGGKey = config.championGGKey;
 
 const app = express();
 
@@ -138,5 +139,5 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '/public/'));
 });
 
-app.listen(8080);
+app.listen(config.appPort);
 console.log('App listening on port 8080');

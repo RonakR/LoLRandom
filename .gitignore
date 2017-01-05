@@ -1,4 +1,5 @@
 node_modules/*
 public/images/*.png
 public/bower_components/*
+config.json
 todo.txt
