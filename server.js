@@ -9,8 +9,8 @@ const request = require('request');
 const session = require('express-session');
 const winston = require('winston');
 
-const riotAPIKey = config.riotAPIKey;
 const championGGKey = config.championGGKey;
+const riotAPIKey = config.riotAPIKey;
 
 const app = express();
 winston.level = config.env === 'prod' ? 'error' : 'debug';
