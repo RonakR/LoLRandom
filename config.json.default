@@ -2,4 +2,5 @@
   "riotAPIKey": "",
   "championGGKey": "",
   "appPort": 8080,
+  "env": "dev",
 }

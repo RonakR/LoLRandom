@@ -1,17 +1,19 @@
-const express = require('express');
-const request = require('request');
-const mongoose = require('mongoose');
 const _ = require('underscore');
-const fs = require('fs');
 const bodyParser = require('body-parser');
-const session = require('express-session');
-const path = require('path');
 const config = require('./config.json');
-// Keys should be in a config file
+const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const mongoose = require('mongoose');
+const request = require('request');
+const session = require('express-session');
+const winston = require('winston');
+
 const riotAPIKey = config.riotAPIKey;
 const championGGKey = config.championGGKey;
 
 const app = express();
+winston.level = config.env === 'prod' ? 'error' : 'debug';
 
 mongoose.connect('mongodb://localhost/lolrandom');
 
@@ -45,7 +47,7 @@ function getMoreChampionData(championName) {
   return new Promise((resolve, reject) => {
     request(`http://api.champion.gg/champion/${championName}?api_key=${championGGKey}`, (err, response, body) => {
       if (err) {
-        console.log(err);
+        winston.error(err);
         reject(err);
       }
       const data = JSON.parse(body);
@@ -85,7 +87,7 @@ function getChampionImage(championName) {
     // Make patch number configurat
     request(`http://ddragon.leagueoflegends.com/cdn/6.24.1/img/champion/${championNamePng}`)
     .on('error', (err) => {
-      console.log(err);
+      winston.error(err);
       reject(err);
     })
     .pipe(fs.createWriteStream(`./public/images/${championNamePng}`));
@@ -111,7 +113,7 @@ function populateFromData(data) {
       throw err;
     });
   });
-  console.log('added/updated');
+  winston.debug('added/updated');
 }
 
 // Populates the db by hitting riot's api.
@@ -140,4 +142,4 @@ app.get('*', (req, res) => {
 });
 
 app.listen(config.appPort);
-console.log('App listening on port 8080');
+winston.debug('App listening on port 8080');
