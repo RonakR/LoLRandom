@@ -6,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const request = require('request');
+const bluebird = require('bluebird');
 const session = require('express-session');
 const winston = require('winston');
 
