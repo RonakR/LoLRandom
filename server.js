@@ -31,6 +31,7 @@ const Champion = mongoose.model('Champion', {
 });
 
 function createLaneInfoObj(patchWin, patchPlay) {
+  winston.debug(patchWin, patchPlay);
   return {
     patchWin: patchWin[patchWin.length - 1] > patchWin[patchWin.length - 2] ? 'UP' : 'DOWN',
     patchPlay: patchPlay[patchPlay.length - 1] > patchPlay[patchPlay.length - 2] ? 'UP' : 'DOWN',

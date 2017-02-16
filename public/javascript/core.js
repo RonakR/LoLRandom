@@ -14,8 +14,8 @@ lolRandom.controller('mainController', ['$scope', '$http', ($scope, $http) => {
     $scope.champion = ''
     const sendVar = $('.chosen-select').val();
     $http.post('api/championsByRoles', sendVar)
-    .success((data) => {
-      $scope.champions = data;
+    .then((body) => {
+      $scope.champions = body.data;
       // $scope.alterData();
     });
   };
